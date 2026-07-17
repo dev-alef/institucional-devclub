@@ -1,0 +1,133 @@
+/* Formações v2 — grade filtrável */
+.formacoes {
+  /* herda .secao; nada de pin, nada de min-height forçado */
+}
+
+.form-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 36px;
+}
+.form-filtro {
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  color: var(--cinza);
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.form-filtro:hover {
+  color: var(--papel);
+  border-color: var(--destaque-suave);
+}
+.form-filtro--ativo {
+  color: #06210d;
+  background: var(--destaque);
+  border-color: var(--destaque);
+}
+
+.form-grade {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.form-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.form-card:hover {
+  border-color: var(--destaque-suave);
+  transform: translateY(-6px);
+}
+
+/* arte pixel: cresce e "acende" no hover */
+.form-card-arte {
+  width: 74px;
+  height: 74px;
+  transition: transform 0.35s ease;
+}
+.form-card:hover .form-card-arte {
+  transform: scale(1.12) rotate(3deg);
+}
+
+.form-card-cmd {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  color: var(--destaque-suave);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  text-align: right;
+}
+.form-card:hover .form-card-cmd {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-card-base {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+.form-card-indice {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  color: var(--destaque-suave);
+}
+.form-card-nome {
+  font-family: var(--fonte-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.form-card-tag {
+  font-family: var(--fonte-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+
+.form-card--cta {
+  background: var(--destaque);
+  border-color: var(--destaque);
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  min-height: 200px;
+}
+.form-card--cta .form-card-nome {
+  color: #06210d;
+  font-size: 1.3rem;
+}
+.form-card-botao {
+  font-family: var(--fonte-mono);
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--destaque);
+  background: #06210d;
+  padding: 12px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  align-self: center;
+  transition: transform 0.2s ease;
+}
+.form-card-botao:hover { transform: translateY(-2px); }
