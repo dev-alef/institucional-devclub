@@ -1,0 +1,98 @@
+/* ============================================================
+   index.css — fundação global: tokens, reset, tipografia
+   ============================================================ */
+:root {
+  /* Paleta — identidade oficial DevClub (tokens por FUNÇÃO) */
+  --bg-boot: #060309;
+  --bg-hero: #1a0b2e;
+  --bg-fundo: #0d0716;        /* roxo mais profundo p/ seções */
+  --bg-card: #150b26;         /* superfície de cards */
+  --borda: #2a1a45;           /* borda sutil violeta */
+  --destaque: #3ddc5a;
+  --destaque-suave: #1e7a38;
+  --papel: #f4f1f7;
+  --cinza: #a79fb3;
+
+  --fonte-display: "Archivo Black", sans-serif;
+  --fonte-texto: "Inter", sans-serif;
+  --fonte-mono: "JetBrains Mono", monospace;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* scroll-behavior removido: o Lenis assume o scroll da página */
+
+body {
+  background: var(--bg-fundo);
+  color: var(--papel);
+  font-family: var(--fonte-texto);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* pin/scroll horizontal não podem vazar */
+}
+
+:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+/* ---------- utilitários compartilhados pelas seções ---------- */
+
+.secao {
+  position: relative;
+  padding: 110px 24px;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* "eyebrow" de terminal: o fio condutor do conceito — cada
+   seção abre com um pseudo-comando, lembrando a intro */
+.secao-comando {
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--destaque);
+  letter-spacing: 0.06em;
+  margin-bottom: 18px;
+}
+.secao-comando::before {
+  content: "$ ";
+  color: var(--destaque-suave);
+}
+
+.secao-titulo {
+  font-family: var(--fonte-display);
+  font-size: clamp(1.7rem, 4.5vw, 3rem);
+  line-height: 1.12;
+  text-transform: uppercase;
+  max-width: 760px;
+}
+.secao-titulo em {
+  font-style: normal;
+  color: var(--destaque);
+}
+
+.secao-sub {
+  margin-top: 18px;
+  color: var(--cinza);
+  font-size: clamp(0.95rem, 2vw, 1.08rem);
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+/* estado inicial dos reveals por scroll (GSAP leva a 1 / y:0) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
