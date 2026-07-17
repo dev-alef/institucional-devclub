@@ -1,0 +1,308 @@
+/* ============================================================
+   secoes.css — estilos compartilhados das dobras
+   ============================================================ */
+
+/* ---------- Diferenciais ---------- */
+.dif-lista {
+  list-style: none;
+  margin-top: 56px;
+  border-top: 1px solid var(--borda);
+}
+.dif-item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 26px 8px;
+  border-bottom: 1px solid var(--borda);
+  transition: background 0.25s ease;
+}
+.dif-item:hover { background: rgba(61, 220, 90, 0.03); }
+.dif-indice {
+  font-family: var(--fonte-mono);
+  color: var(--destaque-suave);
+  font-size: 0.85rem;
+}
+.dif-titulo {
+  font-family: var(--fonte-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.dif-desc {
+  color: var(--cinza);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.dif-check {
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  color: var(--destaque);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.dif-item:hover .dif-check { opacity: 1; }
+
+/* ---------- Plataforma (grade bento) ---------- */
+.plat-grade {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.plat-celula {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 26px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.plat-celula:hover {
+  border-color: var(--destaque-suave);
+  transform: translateY(-4px);
+}
+.plat-celula--principal {
+  grid-column: span 2;
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.plat-titulo {
+  font-family: var(--fonte-display);
+  font-size: 1.02rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.plat-janela {
+  background: #0a0512;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  margin-bottom: auto;
+}
+.plat-janela-barra {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.plat-janela-barra span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--borda);
+}
+.plat-janela-linha {
+  color: var(--cinza);
+  padding: 3px 0;
+}
+.plat-janela-linha--ok { color: var(--destaque); }
+
+@media (max-width: 860px) {
+  .plat-grade { grid-template-columns: 1fr 1fr; }
+  .plat-celula--principal { grid-column: span 2; grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .plat-grade { grid-template-columns: 1fr; }
+  .plat-celula--principal { grid-column: auto; }
+}
+
+/* ---------- Depoimentos (mosaico) ---------- */
+.dep-mosaico {
+  margin-top: 56px;
+  columns: 3 300px; /* masonry: N colunas de ~300px, quebra sozinho */
+  column-gap: 18px;
+}
+.dep-card {
+  break-inside: avoid; /* card nunca é fatiado entre colunas */
+  margin-bottom: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.25s ease;
+}
+.dep-card:hover { border-color: var(--destaque-suave); }
+.dep-fala {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--papel);
+}
+.dep-autor {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dep-nome {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.dep-cargo {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--destaque);
+  text-transform: lowercase;
+}
+
+/* ---------- Professores ---------- */
+.prof-grade {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
+.prof-card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 26px 20px;
+  text-align: center;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.prof-card:hover {
+  border-color: var(--destaque-suave);
+  transform: translateY(-4px);
+}
+.prof-avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(61, 220, 90, 0.08);
+  border: 1px solid var(--destaque-suave);
+  color: var(--destaque);
+  font-family: var(--fonte-display);
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+.prof-nome {
+  font-family: var(--fonte-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+.prof-area {
+  margin-top: 6px;
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  color: var(--cinza);
+}
+
+/* ---------- Faculdade + bônus ---------- */
+.fac-grade {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.fac-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--papel);
+  border: 1px solid var(--destaque-suave);
+  border-radius: 999px;
+  padding: 10px 20px;
+}
+.fac-selo-check { color: var(--destaque); }
+.fac-bonus-titulo {
+  font-family: var(--fonte-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.fac-bonus-lista { list-style: none; }
+.fac-bonus-item {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--borda);
+  color: var(--cinza);
+  font-size: 0.95rem;
+}
+.fac-bonus-item span {
+  color: var(--destaque);
+  font-family: var(--fonte-mono);
+  margin-right: 10px;
+}
+@media (max-width: 800px) {
+  .fac-grade { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ---------- Fechamento + rodapé ---------- */
+.fechamento {
+  text-align: center;
+  padding-top: 140px;
+  padding-bottom: 140px;
+}
+.fech-terminal {
+  width: min(480px, 92vw);
+  margin-inline: auto;
+  background: #0a0512;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-align: left;
+  box-shadow: 0 0 60px rgba(61, 220, 90, 0.06);
+}
+.fech-linha {
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  color: var(--papel);
+}
+.fech-prompt { color: var(--destaque); }
+.fech-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 3px;
+  background: var(--destaque);
+  vertical-align: text-bottom;
+  animation: piscar 0.9s steps(2) infinite;
+}
+.fech-titulo {
+  max-width: none;
+  margin-top: 40px;
+}
+.fech-cta {
+  opacity: 1;
+  transform: none;
+}
+
+.rodape {
+  border-top: 1px solid var(--borda);
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.rodape-nota {
+  font-size: 0.78rem;
+  color: var(--cinza);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fech-cursor { animation: none; }
+}
+
+/* retratos dos professores */
+.prof-foto {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--destaque-suave);
+  margin-bottom: 16px;
+  filter: saturate(0.85);
+  transition: filter 0.25s ease, border-color 0.25s ease;
+}
+.prof-card:hover .prof-foto {
+  filter: saturate(1.1);
+  border-color: var(--destaque);
+}
