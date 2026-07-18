@@ -9,7 +9,6 @@ import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/TextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./hero.css";
-import FundoVivo from "./FundoVivo";
 
 gsap.registerPlugin(useGSAP, TextPlugin, ScrollTrigger);
 
@@ -49,8 +48,7 @@ export default function Hero() {
             },
           })
           .to(".hero-scroll-dica", { opacity: 0, duration: 0.15 }, 0)
-          .to(".hero-conteudo", { y: -90, opacity: 0.1, duration: 1 }, 0)
-          .to(".hero", { backgroundColor: "#0d0716", duration: 1 }, 0);
+          .to(".hero-conteudo", { y: -90, opacity: 0.1, duration: 1 }, 0);
       });
 
       const tl = gsap.timeline({
@@ -76,7 +74,6 @@ export default function Hero() {
         "+=0.7"
       );
       tl.set(".terminal", { display: "none" });
-      tl.to(".hero", { backgroundColor: "#1a0b2e", duration: 0.8 }, "<");
       tl.to(
         ".palavra",
         { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: "power4.out" },
@@ -110,7 +107,6 @@ export default function Hero() {
 
   return (
     <section className="hero" ref={escopoRef} id="topo">
-      <FundoVivo />
       <div className="terminal" aria-hidden="true">
         <div className="terminal-janela">
           <div className="terminal-barra">

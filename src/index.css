@@ -3,11 +3,9 @@
    ============================================================ */
 :root {
   /* Paleta — identidade oficial DevClub (tokens por FUNÇÃO) */
-  --bg-boot: #060309;
-  --bg-hero: #1a0b2e;
-  --bg-fundo: #0d0716;        /* roxo mais profundo p/ seções */
-  --bg-card: #150b26;         /* superfície de cards */
-  --borda: #2a1a45;           /* borda sutil violeta */
+  --bg-fundo: #050308;        /* preto do site inteiro */
+  --bg-card: #100819;         /* superfície de cards sobre o preto */
+  --borda: #241539;           /* borda sutil violeta */
   --destaque: #3ddc5a;
   --destaque-suave: #1e7a38;
   --papel: #f4f1f7;
@@ -95,4 +93,19 @@ body {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ---------- fundo vivo global ---------- */
+.fundo-vivo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* a malha nunca rouba clique de ninguém */
+}
+/* todo o conteúdo flutua ACIMA do canvas */
+main, .menu {
+  position: relative;
+  z-index: 1;
 }

@@ -1,12 +1,8 @@
 // ============================================================
-// FundoVivo.jsx — malha de pixels reativa ao mouse (canvas)
-// Uma grade de "pixels" roxos apagados cobre o hero; perto do
-// cursor eles acendem em verde e se afastam de leve (repulsão),
-// com uma respiração ambiente sutil. Continua o motivo pixel/QR
-// da identidade.
-// Performance: canvas 2D (um único elemento, milhares de pontos),
-// pausa via IntersectionObserver quando o hero sai da tela, e
-// dpr limitado a 2 (retina sem pagar 3x de pixels).
+// FundoVivo.jsx — malha de pixels reativa, agora GLOBAL:
+// canvas FIXO cobrindo a viewport, atrás do site inteiro.
+// A página rola por cima; a malha fica, reagindo ao mouse em
+// qualquer dobra. Visibilidade aumentada (v2).
 // ============================================================
 import { useEffect, useRef } from "react";
 
@@ -21,28 +17,26 @@ export default function FundoVivo() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    const ESPACO = 46;  // px entre pontos da malha
-    const RAIO = 150;   // alcance da influência do mouse
-    const TAM = 2.2;    // tamanho base do pixel
+    const ESPACO = 44;   // malha um pouco mais densa
+    const RAIO = 180;    // alcance maior do cursor
+    const TAM = 2.6;     // pixel maior
 
     let largura = 0;
     let altura = 0;
     let pontos = [];
     let rafId = null;
-    let rodando = false;
     const mouse = { x: -9999, y: -9999 };
 
     const montarMalha = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      largura = canvas.offsetWidth;
-      altura = canvas.offsetHeight;
+      largura = window.innerWidth;
+      altura = window.innerHeight;
       canvas.width = largura * dpr;
       canvas.height = altura * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       pontos = [];
       for (let y = ESPACO / 2; y < altura; y += ESPACO) {
         for (let x = ESPACO / 2; x < largura; x += ESPACO) {
-          // fase aleatória: cada pixel respira fora de sincronia
           pontos.push({ x, y, fase: Math.random() * Math.PI * 2 });
         }
       }
@@ -54,77 +48,57 @@ export default function FundoVivo() {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.hypot(dx, dy);
-        const perto = Math.max(0, 1 - dist / RAIO); // 0 longe → 1 em cima
+        const perto = Math.max(0, 1 - dist / RAIO);
 
-        // repulsão: quadrática p/ ser forte só bem perto do cursor
-        const empurrao = perto * perto * 14;
+        const empurrao = perto * perto * 16;
         const px = p.x + (dist > 0 ? (dx / dist) * empurrao : 0);
         const py = p.y + (dist > 0 ? (dy / dist) * empurrao : 0);
 
-        // respiração ambiente (0..1), desligada em reduced motion
         const respira = reduzirMovimento
-          ? 0
+          ? 0.4
           : (Math.sin(t / 1400 + p.fase) + 1) / 2;
 
-        const alfa = 0.05 + respira * 0.05 + perto * 0.55;
+        // v2: alphas maiores — a malha agora é personagem, não rumor
+        const alfa = 0.1 + respira * 0.09 + perto * 0.65;
         ctx.fillStyle =
           perto > 0.02
-            ? `rgba(61, 220, 90, ${alfa})`   // verde: tocado pelo cursor
-            : `rgba(122, 92, 180, ${alfa})`; // roxo: estado de repouso
-        const tam = TAM + perto * 2.4;
+            ? `rgba(61, 220, 90, ${alfa})`
+            : `rgba(150, 118, 210, ${alfa})`;
+        const tam = TAM + perto * 2.6;
         ctx.fillRect(px - tam / 2, py - tam / 2, tam, tam);
       }
       rafId = requestAnimationFrame(desenharQuadro);
     };
 
-    const ligar = () => {
-      if (rodando) return;
-      rodando = true;
-      rafId = requestAnimationFrame(desenharQuadro);
-    };
-    const desligar = () => {
-      rodando = false;
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-
     montarMalha();
 
     if (reduzirMovimento) {
-      // versão estática: um único desenho, sem loop nem mouse
-      desenharQuadro(0);
-      desligar();
-    } else {
-      const aoMover = (e) => {
-        const r = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - r.left;
-        mouse.y = e.clientY - r.top;
-      };
-      const aoSair = () => {
-        mouse.x = -9999;
-        mouse.y = -9999;
-      };
-      window.addEventListener("pointermove", aoMover, { passive: true });
-      window.addEventListener("pointerleave", aoSair);
-      window.addEventListener("resize", montarMalha);
-
-      // pausa o loop quando o hero sai da viewport: canvas
-      // animando fora da tela é bateria e CPU no lixo
-      const observador = new IntersectionObserver(
-        ([entrada]) => (entrada.isIntersecting ? ligar() : desligar()),
-        { threshold: 0 }
-      );
-      observador.observe(canvas);
-
-      return () => {
-        desligar();
-        observador.disconnect();
-        window.removeEventListener("pointermove", aoMover);
-        window.removeEventListener("pointerleave", aoSair);
-        window.removeEventListener("resize", montarMalha);
-      };
+      desenharQuadro(0); // um quadro estático (respira fixo em 0.4)
+      if (rafId) cancelAnimationFrame(rafId);
+      return;
     }
 
-    return desligar;
+    const aoMover = (e) => {
+      mouse.x = e.clientX; // canvas fixo na viewport: coords diretas
+      mouse.y = e.clientY;
+    };
+    const aoSair = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    };
+    window.addEventListener("pointermove", aoMover, { passive: true });
+    window.addEventListener("pointerleave", aoSair);
+    window.addEventListener("resize", montarMalha);
+    rafId = requestAnimationFrame(desenharQuadro);
+    // (sem IntersectionObserver: o canvas fixo está sempre visível;
+    // em aba oculta o próprio rAF congela sozinho)
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener("pointermove", aoMover);
+      window.removeEventListener("pointerleave", aoSair);
+      window.removeEventListener("resize", montarMalha);
+    };
   }, []);
 
   return <canvas className="fundo-vivo" ref={canvasRef} aria-hidden="true" />;

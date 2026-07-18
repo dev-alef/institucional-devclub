@@ -76,7 +76,7 @@
   margin-bottom: 8px;
 }
 .plat-janela {
-  background: #0a0512;
+  background: rgba(8, 4, 15, 0.88);
   border: 1px solid var(--borda);
   border-radius: 10px;
   padding: 16px 18px;
@@ -243,7 +243,7 @@
 .fech-terminal {
   width: min(480px, 92vw);
   margin-inline: auto;
-  background: #0a0512;
+  background: rgba(8, 4, 15, 0.88);
   border: 1px solid var(--borda);
   border-radius: 10px;
   padding: 16px 20px;

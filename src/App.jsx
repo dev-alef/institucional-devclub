@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
+import FundoVivo from "./components/FundoVivo";
 import Menu from "./components/Menu";
 import Hero from "./components/Hero";
 import Formacoes from "./components/Formacoes";
@@ -58,6 +59,7 @@ export default function App() {
 
   return (
     <>
+      <FundoVivo />
       <Menu />
       <main>
         <Hero />
