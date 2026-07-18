@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/TextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./hero.css";
+import FundoVivo from "./FundoVivo";
 
 gsap.registerPlugin(useGSAP, TextPlugin, ScrollTrigger);
 
@@ -109,6 +110,7 @@ export default function Hero() {
 
   return (
     <section className="hero" ref={escopoRef} id="topo">
+      <FundoVivo />
       <div className="terminal" aria-hidden="true">
         <div className="terminal-janela">
           <div className="terminal-barra">
