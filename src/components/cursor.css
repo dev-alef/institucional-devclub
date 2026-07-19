@@ -1,0 +1,92 @@
+/* cursor nativo some só quando o customizado ativa.
+   Inclui estados interativos explicitamente: navegadores dão
+   cursor:pointer a button/a/etc. e podem vencer a regra genérica */
+.cursor-customizado,
+.cursor-customizado *,
+.cursor-customizado a,
+.cursor-customizado button,
+.cursor-customizado a:hover,
+.cursor-customizado button:hover,
+.cursor-customizado [role="tab"],
+.cursor-customizado input,
+.cursor-customizado label {
+  cursor: none !important;
+}
+
+.dc-barra,
+.dc-anel,
+.dc-rotulo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* barra piscante de terminal — o "ponto" do cursor */
+.dc-barra {
+  width: 5px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--destaque);
+  box-shadow: 0 0 12px rgba(61, 220, 90, 0.8);
+  z-index: 210;
+  animation: dc-piscar 1.1s steps(2) infinite;
+}
+
+@keyframes dc-piscar {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* anel quadrado arredondado com glow, perseguindo com atraso */
+.dc-anel {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid rgba(61, 220, 90, 0.53);
+  border-radius: 6px;
+  z-index: 209;
+  transition: opacity 0.2s;
+}
+
+/* rótulo contextual (data-cursor-text) */
+.dc-rotulo {
+  background: var(--destaque);
+  color: #06100a;
+  font: 700 12px var(--fonte-mono);
+  padding: 4px 12px;
+  border-radius: 999px;
+  z-index: 211;
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+/* glifos de código: explodem no clique e se removem sozinhos */
+.dc-glifo {
+  position: fixed;
+  font-family: var(--fonte-mono);
+  color: var(--destaque);
+  pointer-events: none;
+  z-index: 208;
+  animation: dc-glifo-voar 0.7s ease-out forwards;
+}
+
+@keyframes dc-glifo-voar {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.5);
+  }
+}
