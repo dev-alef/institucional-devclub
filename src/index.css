@@ -112,3 +112,37 @@ main, .menu {
   position: relative;
   z-index: 1;
 }
+
+/* ---------- números-fantasma de capítulo ----------
+   contador de CSS puro: cada .secao incrementa e exibe seu
+   número gigante vazado no canto — identidade de capítulo
+   sem uma linha de JSX */
+body {
+  counter-reset: capitulo;
+}
+.secao {
+  counter-increment: capitulo;
+}
+.secao::before {
+  content: "0" counter(capitulo);
+  position: absolute;
+  top: 48px;
+  right: 8px;
+  font-family: var(--fonte-display);
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--borda);
+  pointer-events: none;
+  user-select: none;
+}
+/* o fechamento é epílogo, não capítulo */
+.fechamento::before {
+  content: none;
+}
+@media (max-width: 640px) {
+  .secao::before {
+    top: 28px;
+    font-size: 3.4rem;
+  }
+}

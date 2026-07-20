@@ -37,6 +37,10 @@ export default function Hero() {
       // Fase 4 — criada só quando a intro termina (fotografia
       // dos valores iniciais; ver DECISIONS.md)
       const iniciarFaseScroll = contextSafe(() => {
+        // pin é o recurso mais temperamental do mobile (barra de URL,
+        // viewport dinâmico); e o desvanecer preso rende pouco em tela
+        // pequena. Troca consciente: no celular, hero é seção normal.
+        if (window.innerWidth < 768) return;
         gsap
           .timeline({
             scrollTrigger: {

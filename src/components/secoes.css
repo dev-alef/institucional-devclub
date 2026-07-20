@@ -333,3 +333,26 @@
   .prof-card { padding: 20px 14px; }
   .prof-foto { width: 64px; height: 64px; }
 }
+
+/* ---------- mobile: plataforma compacta e diferenciais enxutos */
+@media (max-width: 640px) {
+  /* células-satélite em 2 colunas: metade da altura empilhada */
+  .plat-grade {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .plat-celula {
+    padding: 18px 16px;
+  }
+  .plat-celula--principal {
+    grid-column: span 2;
+  }
+  .plat-titulo { font-size: 0.9rem; }
+
+  .dif-item {
+    grid-template-columns: 40px 1fr;
+    padding: 20px 4px;
+  }
+  .dif-check { display: none; } /* hover não existe no toque */
+  .dif-titulo { font-size: 1rem; }
+}
