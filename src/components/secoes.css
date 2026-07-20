@@ -306,3 +306,30 @@
   filter: saturate(1.1);
   border-color: var(--destaque);
 }
+
+/* ---------- mobile: depoimentos viram carrossel, professores 2 col */
+@media (max-width: 640px) {
+  .dep-mosaico {
+    columns: auto;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    margin-inline: -20px;
+    padding: 4px 20px 18px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .dep-mosaico::-webkit-scrollbar { display: none; }
+  .dep-card {
+    flex: 0 0 78vw;
+    margin-bottom: 0;
+    scroll-snap-align: center;
+  }
+  .prof-grade {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .prof-card { padding: 20px 14px; }
+  .prof-foto { width: 64px; height: 64px; }
+}

@@ -131,3 +131,26 @@
   transition: transform 0.2s ease;
 }
 .form-card-botao:hover { transform: translateY(-2px); }
+
+/* ---------- mobile: carrossel de deslize nativo ----------
+   NÃO confundir com o scroll horizontal sequestrado que abolimos:
+   aqui o deslize é gesto voluntário do dedo (scroll-snap nativo);
+   a rolagem vertical da página passa reto. */
+@media (max-width: 640px) {
+  .form-grade {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    margin-inline: -20px;        /* sangra até as bordas da tela */
+    padding: 8px 20px 18px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;       /* firefox */
+  }
+  .form-grade::-webkit-scrollbar { display: none; } /* chrome/safari */
+  .form-card {
+    flex: 0 0 76vw;              /* card ocupa 76% da tela: o vizinho
+                                    aparece na borda = convite ao deslize */
+    scroll-snap-align: center;
+  }
+}

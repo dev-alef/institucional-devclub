@@ -13,6 +13,12 @@ export default function FundoVivo() {
     const reduzirMovimento = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    // toque não é hover: em aparelho sem mouse, a malha ignora o
+    // ponteiro (senão o último toque fica "gravado" e a malha
+    // permanece acesa ali para sempre — não há pointerleave no touch)
+    const temMouse = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -88,8 +94,10 @@ export default function FundoVivo() {
       mouse.x = -9999;
       mouse.y = -9999;
     };
-    window.addEventListener("pointermove", aoMover, { passive: true });
-    window.addEventListener("pointerleave", aoSair);
+    if (temMouse) {
+      window.addEventListener("pointermove", aoMover, { passive: true });
+      window.addEventListener("pointerleave", aoSair);
+    }
     window.addEventListener("resize", montarMalha);
     rafId = requestAnimationFrame(desenharQuadro);
     // (sem IntersectionObserver: o canvas fixo está sempre visível;
