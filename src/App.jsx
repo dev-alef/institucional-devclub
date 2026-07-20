@@ -20,6 +20,10 @@ import Fechamento from "./components/Fechamento";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+// mobile: a barra de URL do navegador some/aparece ao rolar e dispara
+// "resize"; sem esta config, todo pin recalcula e a página dá saltos
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 export default function App() {
   // Lenis: um relógio só para scroll + GSAP (ver DECISIONS.md)
   useEffect(() => {

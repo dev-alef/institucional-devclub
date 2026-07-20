@@ -17,7 +17,9 @@ export default function FundoVivo() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    const ESPACO = 44;   // malha um pouco mais densa
+    // telas pequenas: malha mais espaçada (menos pontos por frame
+    // = economia de bateria; no celular não há mouse, só a respiração)
+    const ESPACO = window.innerWidth < 640 ? 58 : 44;
     const RAIO = 180;    // alcance maior do cursor
     const TAM = 2.6;     // pixel maior
 
