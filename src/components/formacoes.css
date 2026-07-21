@@ -70,7 +70,7 @@
   right: 22px;
   font-family: var(--fonte-mono);
   font-size: 0.68rem;
-  color: var(--destaque-suave);
+  color: var(--destaque-texto);
   opacity: 0;
   transform: translateY(-4px);
   transition: opacity 0.25s ease, transform 0.25s ease;
@@ -90,7 +90,7 @@
 .form-card-indice {
   font-family: var(--fonte-mono);
   font-size: 0.75rem;
-  color: var(--destaque-suave);
+  color: var(--destaque-texto);
 }
 .form-card-nome {
   font-family: var(--fonte-display);

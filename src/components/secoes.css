@@ -20,7 +20,7 @@
 .dif-item:hover { background: rgba(61, 220, 90, 0.03); }
 .dif-indice {
   font-family: var(--fonte-mono);
-  color: var(--destaque-suave);
+  color: var(--destaque-texto);
   font-size: 0.85rem;
 }
 .dif-titulo {

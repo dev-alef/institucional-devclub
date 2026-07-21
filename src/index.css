@@ -7,7 +7,8 @@
   --bg-card: #100819;         /* superfície de cards sobre o preto */
   --borda: #241539;           /* borda sutil violeta */
   --destaque: #3ddc5a;
-  --destaque-suave: #1e7a38;
+  --destaque-suave: #1e7a38; /* bordas e detalhes — NÃO texto */
+  --destaque-texto: #35c058;  /* verde p/ texto pequeno: contraste AA sobre os fundos escuros */
   --papel: #f4f1f7;
   --cinza: #a79fb3;
 
