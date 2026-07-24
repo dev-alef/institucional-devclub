@@ -29,7 +29,7 @@ export default function Fechamento() {
         <span className="menu-logo-marca">&lt;DevClub/&gt;</span>
         <p className="rodape-nota">
           Página conceitual criada para o concurso DevClub · dados
-          ilustrativos · #semDesculpas
+          ilustrativos · #semDesculpas - Desenvolvido por Alerson Ferreira
         </p>
       </footer>
     </>
