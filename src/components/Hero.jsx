@@ -40,7 +40,11 @@ export default function Hero() {
         // pin é o recurso mais temperamental do mobile (barra de URL,
         // viewport dinâmico); e o desvanecer preso rende pouco em tela
         // pequena. Troca consciente: no celular, hero é seção normal.
-        if (window.innerWidth < 768) return;
+        // Critério reforçado: além da largura, exige mouse de VERDADE
+        // (mesmo teste do cursor customizado) — mais confiável que só
+        // width em dispositivos reais, evita qualquer ambiguidade.
+        const temMouseReal = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        if (window.innerWidth < 768 || !temMouseReal) return;
         gsap
           .timeline({
             scrollTrigger: {
