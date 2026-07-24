@@ -540,3 +540,67 @@
 
 /* glassmorphism aplicado (padrão Adapta/Reflect) */
 .plat-janela { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+/* ---------- Professores v2: card "recomendado por profissionais" ---------- */
+.prof-grade {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.prof-card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.prof-card:hover {
+  border-color: var(--destaque-suave);
+  transform: translateY(-4px);
+}
+.prof-card-foto-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.prof-card-foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.75) contrast(1.05);
+}
+.prof-card-foto-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(8,4,15,0.95) 100%);
+}
+.prof-card-aspas {
+  position: absolute;
+  bottom: -6px;
+  left: 18px;
+  z-index: 1;
+  font-family: var(--fonte-display);
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--destaque);
+}
+.prof-card-fala {
+  padding: 18px 20px 8px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--papel);
+  flex-grow: 1;
+}
+.prof-card-rodape {
+  padding: 4px 20px 20px;
+}
+@media (max-width: 860px) {
+  .prof-grade { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .prof-grade { grid-template-columns: 1fr; }
+}
