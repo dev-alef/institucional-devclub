@@ -147,3 +147,57 @@ body {
     font-size: 3.4rem;
   }
 }
+
+/* ---------- glow radial ambiente ----------
+   inspirado no "spot de luz" do Adapta/Reflect: blobs de cor
+   desfocados atrás do conteúdo, dando profundidade sem custo de
+   JS. Usar com moderação — 1-2 por seção, nunca sobre texto denso. */
+.glow-spot {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-spot--verde {
+  background: radial-gradient(circle, rgba(61, 220, 90, 0.5), transparent 65%);
+}
+.glow-spot--roxo {
+  background: radial-gradient(circle, rgba(122, 92, 180, 0.42), transparent 65%);
+}
+
+/* ---------- glassmorphism ----------
+   vidro fosco para janelas de terminal "flutuando" sobre a malha:
+   backdrop-filter borra o que está atrás, dando sensação de vidro */
+.vidro {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(61, 220, 90, 0.15);
+}
+
+/* ---------- tilt 3D (perspectiva do card) ----------
+   variáveis manipuladas via JS a cada movimento do mouse;
+   o CSS só declara COMO reagir às variáveis */
+.tilt-3d {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(700px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+  /* CORREÇÃO: sem isso, SVG/texto dentro de um elemento com
+     perspective 3D renderiza borrado no Chrome (o navegador cria
+     uma camada de composição e "achata" o conteúdo com antialiasing
+     de subpixel). backface-visibility:hidden evita esse artefato. */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+/* filhos com SVG/texto: layer própria nítida (reforço da correção) */
+.tilt-3d svg,
+.tilt-3d img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt-3d { transform: none !important; }
+}

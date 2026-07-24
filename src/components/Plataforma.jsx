@@ -1,5 +1,6 @@
 // Plataforma — grade bento: uma célula grande (a plataforma) e
 // células menores orbitando (recursos).
+import useTilt3D from "../hooks/useTilt3D";
 import "./secoes.css";
 
 const RECURSOS = [
@@ -12,6 +13,7 @@ const RECURSOS = [
 ];
 
 export default function Plataforma() {
+  const tiltRef = useTilt3D();
   return (
     <section className="secao" id="plataforma">
       <p className="secao-comando" data-reveal>devclub open --plataforma</p>
@@ -24,7 +26,7 @@ export default function Plataforma() {
       </p>
 
       <div className="plat-grade">
-        <article className="plat-celula plat-celula--principal" data-reveal>
+        <article className="plat-celula plat-celula--principal tilt-3d" data-reveal ref={tiltRef}>
           <div className="plat-janela" aria-hidden="true">
             <div className="plat-janela-barra">
               <span></span><span></span><span></span>

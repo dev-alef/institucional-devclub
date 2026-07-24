@@ -78,9 +78,13 @@ export default function Hero() {
         "+=0.7"
       );
       tl.set(".terminal", { display: "none" });
-      tl.to(
+      // "efeito Asimov": o texto nasce desfocado e GANHA FOCO,
+      // além de subir — blur(filter) é caro para animar contínuo,
+      // mas aqui é uma transição ÚNICA de 0.7s, custo desprezível
+      tl.fromTo(
         ".palavra",
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: "power4.out" },
+        { filter: "blur(10px)" },
+        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.7, stagger: 0.08, ease: "power4.out" },
         "<+0.1"
       );
       tl.to(".hero-sub", { y: 0, opacity: 1, duration: 0.6 }, "-=0.4");
@@ -111,6 +115,11 @@ export default function Hero() {
 
   return (
     <section className="hero" ref={escopoRef} id="topo">
+      {/* glow ambiente (padrão Adapta/Reflect): dois blobs desfocados
+          atrás de tudo, dando profundidade sem custo de JS */}
+      <span className="glow-spot glow-spot--verde" style={{ width: 460, height: 460, top: "-10%", left: "8%" }} aria-hidden="true" />
+      <span className="glow-spot glow-spot--roxo" style={{ width: 520, height: 520, top: "20%", right: "5%" }} aria-hidden="true" />
+
       <div className="terminal" aria-hidden="true">
         <div className="terminal-janela">
           <div className="terminal-barra">

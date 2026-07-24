@@ -6,6 +6,7 @@
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import useTilt3D from "../hooks/useTilt3D";
 import "./formacoes.css";
 
 const FORMACOES = [
@@ -55,6 +56,23 @@ function criarRng(seed) {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+}
+
+// card com tilt 3D próprio (cada card precisa do SEU hook,
+// não dá pra compartilhar um ref entre múltiplos elementos)
+function CardFormacao({ f, i }) {
+  const tiltRef = useTilt3D();
+  return (
+    <article className="form-card tilt-3d" ref={tiltRef}>
+      <PixelArte nome={f.nome} />
+      <p className="form-card-cmd">$ devclub add {f.cmd}</p>
+      <div className="form-card-base">
+        <span className="form-card-indice">{String(i + 1).padStart(2, "0")}</span>
+        <h3 className="form-card-nome">{f.nome}</h3>
+        <span className="form-card-tag">{f.tag}</span>
+      </div>
+    </article>
+  );
 }
 
 function PixelArte({ nome }) {
@@ -133,15 +151,7 @@ export default function Formacoes() {
 
       <div className="form-grade">
         {visiveis.map((f, i) => (
-          <article className="form-card" key={f.cmd}>
-            <PixelArte nome={f.nome} />
-            <p className="form-card-cmd">$ devclub add {f.cmd}</p>
-            <div className="form-card-base">
-              <span className="form-card-indice">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="form-card-nome">{f.nome}</h3>
-              <span className="form-card-tag">{f.tag}</span>
-            </div>
-          </article>
+          <CardFormacao f={f} i={i} key={f.cmd} />
         ))}
 
         <article className="form-card form-card--cta">

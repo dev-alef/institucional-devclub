@@ -7,7 +7,8 @@ export default function Fechamento() {
   return (
     <>
       <section className="secao fechamento" id="matricula">
-        <div className="fech-terminal" data-reveal>
+        <span className="glow-spot glow-spot--verde" style={{ width: 500, height: 500, top: "10%", left: "50%", transform: "translateX(-50%)" }} aria-hidden="true" />
+        <div className="fech-terminal vidro" data-reveal>
           <div className="plat-janela-barra" aria-hidden="true">
             <span></span><span></span><span></span>
           </div>
