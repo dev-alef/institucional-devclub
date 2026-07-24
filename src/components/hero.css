@@ -238,3 +238,9 @@
     font-size: 1.1rem;
   }
 }
+
+/* CORREÇÃO DE EMERGÊNCIA: marquee removido do mobile por completo.
+   Elimina qualquer risco de overflow vindo dele, seja qual for a causa. */
+@media (max-width: 640px) {
+  .hero-empresas { display: none; }
+}
